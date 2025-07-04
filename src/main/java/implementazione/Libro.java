@@ -1,5 +1,6 @@
+package implementazione;
+
 import java.io.Serializable;
-import java.util.Objects;
 
 public class Libro implements Serializable {
     //Attributi richiesti per il libro:
@@ -151,7 +152,7 @@ public class Libro implements Serializable {
 
     @Override
     public String toString() {
-        return "Libro{" +
+        return "implementazione.Libro{" +
                 "titolo='" + titolo + '\'' +
                 ", autore='" + autore + '\'' +
                 ", codiceISBN='" + codiceISBN + '\'' +

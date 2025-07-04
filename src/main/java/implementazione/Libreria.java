@@ -1,3 +1,8 @@
+package implementazione;
+
+import implementazione.Libro;
+import ordinamento.OrdinamentoContext;
+
 import java.util.*;
 
 interface Libreria extends Iterable<Libro> {
@@ -17,9 +22,11 @@ interface Libreria extends Iterable<Libro> {
     void rimuoviLibro(Libro libro);
 
     /**
-     * #TODO
+     * Imposta l'ordinamento dei libri.
+     * @param strategy se la strategy è null, restituiamo la lista di default
      */
-    void setOrdine(/** #TODO */);
+    void setOrdine(OrdinamentoContext strategy);
+
     /**
      * #TODO
      */
