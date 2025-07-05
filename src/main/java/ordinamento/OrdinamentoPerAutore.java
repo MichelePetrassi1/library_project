@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrdinamentoPerAutore implements OrdinamentoStrategy {
+    public OrdinamentoPerAutore(){}
     @Override
     public List<Libro> ordinaLibri(List<Libro> libri) {
         return libri.stream()

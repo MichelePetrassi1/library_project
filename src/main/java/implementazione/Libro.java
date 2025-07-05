@@ -6,7 +6,7 @@ public class Libro implements Serializable {
     //Attributi richiesti per il libro:
     String titolo, autore, codiceISBN;
     int valutazione; //la valutazione sarà da 1 a 5
-    enum StatoLettura {LETTO, DALEGGERE, INLETTURA};
+    public enum StatoLettura {LETTO, DALEGGERE, INLETTURA};
     StatoLettura statoLettura;
     public enum Genere {
         ROMANZO,
@@ -38,8 +38,8 @@ public class Libro implements Serializable {
         this.statoLettura = statoLettura;
     }
     public Libro(String titolo, String autore, Genere genere, String codiceISBN) {
-        if(codiceISBN == null || !(isValidIsbn10(codiceISBN) || isValidIsbn13(codiceISBN)) || codiceISBN.isEmpty())
-            throw new IllegalArgumentException("Il codice ISBN del libro non è valido");
+        //if(codiceISBN == null || !(isValidIsbn10(codiceISBN) || isValidIsbn13(codiceISBN)) || codiceISBN.isEmpty())
+        //    throw new IllegalArgumentException("Il codice ISBN del libro non è valido");
         if(titolo == null || titolo.isEmpty())
             throw new IllegalArgumentException("Inserisci il titolo");
         if(autore == null || autore.isEmpty())

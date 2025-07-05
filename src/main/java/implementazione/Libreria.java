@@ -2,22 +2,27 @@ package implementazione;
 
 import implementazione.Libro;
 import ordinamento.OrdinamentoContext;
+import ordinamento.OrdinamentoStrategy;
 
 import java.util.*;
 
-interface Libreria extends Iterable<Libro> {
+public  interface Libreria extends Iterable<Libro> {
     /**
-     * #TODO
+     * Restituisce la lista dei libri
      */
     List<Libro> getLibri();
 
     /**
-     * #TODO
+     * Aggiunge un libro
+     * @param libro
+     * @throws IllegalArgumentException se il libro è null o è già presente
      */
     void aggiungiLibro(Libro libro);
 
     /**
-     * #TODO
+     * Rimuove un libro
+     * @param libro
+     * @throws IllegalArgumentException se il libro è null
      */
     void rimuoviLibro(Libro libro);
 
@@ -25,7 +30,12 @@ interface Libreria extends Iterable<Libro> {
      * Imposta l'ordinamento dei libri.
      * @param strategy se la strategy è null, restituiamo la lista di default
      */
-    void setOrdine(OrdinamentoContext strategy);
+    void setOrdine(OrdinamentoStrategy strategy);
+
+    /**
+     * Ripristina l'ultimo salvataggio se possibile
+     */
+    void undo();
 
     /**
      * #TODO
