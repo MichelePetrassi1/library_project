@@ -1,14 +1,21 @@
 package implementazione;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import filtro.FiltroBuilder;
 import ordinamento.*;
 import persistenza.*;
+import filtro.Filtro;
 
 public class LibreriaImplementazione implements Libreria {
 
     private LibreriaOriginator originator;
     private OrdinamentoContext ordinamento;
+    private Filtro filtro;
 
     public LibreriaImplementazione() {
         this.originator = new LibreriaOriginator();
@@ -21,8 +28,19 @@ public class LibreriaImplementazione implements Libreria {
 
     @Override
     public List<Libro> getLibri() {
-        List<Libro> libri = originator.getLibri();
-        return ordinamento.eseguiOrdinamento(libri);
+        List<Libro> base = originator.getLibri();
+        List<Libro> risultato = new ArrayList<>(base);
+
+        if (filtro != null) {
+            Predicate<Libro> criterio = libro -> filtro.test(libro);
+            risultato = risultato.stream().filter(criterio).collect(Collectors.toList());
+        }
+
+        if (ordinamento != null) {
+            risultato = ordinamento.eseguiOrdinamento(risultato);
+        }
+
+        return risultato;
 
     }
 
@@ -57,18 +75,18 @@ public class LibreriaImplementazione implements Libreria {
     }
 
     @Override
-    public void setOrdine(OrdinamentoStrategy strategy) {
-        ordinamento.setStrategy(strategy);
+    public void setOrdine(OrdinamentoContext context) { this.ordinamento = context; }
+
+    @Override
+    public void undo() { originator.undo();
     }
 
     @Override
-    public void undo() {
-        originator.undo();
-    }
+    public void redo() { originator.redo();}
 
     @Override
-    public void setFiltro() {
-    //#TODO
+    public void setFiltro(Filtro filtro) {
+        this.filtro = filtro;
     }
 
     @Override

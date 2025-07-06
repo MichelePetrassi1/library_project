@@ -30,6 +30,8 @@ public class Libro implements Serializable {
      * Generiamo i costruttori che ci sono utili, i getters e i setters
      */
 
+    public Libro() { }
+
     public Libro(String titolo, String autore, Genere genere, String codiceISBN, int valutazione, StatoLettura statoLettura) {
         this(titolo, autore, genere, codiceISBN);
         if(valutazione < 1 || valutazione > 5)

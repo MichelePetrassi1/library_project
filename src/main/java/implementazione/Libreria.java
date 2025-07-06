@@ -1,6 +1,6 @@
 package implementazione;
 
-import implementazione.Libro;
+import filtro.Filtro;
 import ordinamento.OrdinamentoContext;
 import ordinamento.OrdinamentoStrategy;
 
@@ -28,9 +28,9 @@ public  interface Libreria extends Iterable<Libro> {
 
     /**
      * Imposta l'ordinamento dei libri.
-     * @param strategy se la strategy è null, restituiamo la lista di default
+     * @param context
      */
-    void setOrdine(OrdinamentoStrategy strategy);
+    void setOrdine(OrdinamentoContext context);
 
     /**
      * Ripristina l'ultimo salvataggio se possibile
@@ -38,7 +38,12 @@ public  interface Libreria extends Iterable<Libro> {
     void undo();
 
     /**
+     * Ripristina l'ultima undo()
+     */
+    void redo();
+
+    /**
      * #TODO
      */
-    void setFiltro(/** #TODO */);
+    void setFiltro(Filtro filtro);
 }

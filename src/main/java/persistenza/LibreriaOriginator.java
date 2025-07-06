@@ -49,6 +49,15 @@ public class LibreriaOriginator {
         }
     }
 
+    public void redo() {
+        if (caretaker.haStatiRedo()) {
+            caretaker.salvaStato(new LibreriaMemento(libri));
+            libri = caretaker.ripristinaStatoRedo().getStatoSalvato();
+        } else {
+            System.out.println("Nessuno stato redo disponibile.");
+        }
+    }
+
     private void salvaStatoCorrente() {
         caretaker.salvaStato(new LibreriaMemento(libri));
     }
