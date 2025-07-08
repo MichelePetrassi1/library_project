@@ -14,10 +14,6 @@ public class FiltroProduct implements Filtro{
         if (filtro != null) criteri.add(filtro);
     }
 
-    public void rimuoviFiltro(Filtro filtro) {
-        criteri.remove(filtro);
-    }
-
     @Override
     public boolean test(Libro libro) {
         for (Filtro filtro : criteri) {

@@ -20,13 +20,44 @@ public class LibreriaOriginator {
     }
 
     public void aggiungiLibro(Libro libro) {
-        salvaStatoCorrente(); // salva stato prima della modifica
+        caretaker.salvaMemento(new LibreriaMemento(libri));
         libri.add(libro);
+        salvaSuFile();
     }
 
     public void rimuoviLibro(Libro libro) {
-        salvaStatoCorrente();
+        caretaker.salvaMemento(new LibreriaMemento(libri));
         libri.remove(libro);
+        salvaSuFile();
+    }
+
+    public void modificaLibro(Libro originale, Libro nuovo) {
+        caretaker.salvaMemento(new LibreriaMemento(libri));
+        //trovo l'indice del libro originale
+        int indice = libri.indexOf(originale);
+        if (indice == -1) {
+            throw new IllegalArgumentException("Impossibile modificare: libro non trovato");
+        }
+        libri.set(indice, nuovo);
+        salvaSuFile();
+    }
+
+    public void undo() {
+        if (!caretaker.haMementoUndo()) return;
+        // salviamo il memento corrente per redo
+        caretaker.pushRedo(new LibreriaMemento(libri));
+        // ripristiniamo l’ultimo memento salvato
+        libri = caretaker.popUndo().getStatoSalvato();
+        salvaSuFile();
+    }
+
+    public void redo() {
+        if (!caretaker.haMementoRedo()) return;
+        // salviamo il memento corrente per undo
+        caretaker.pushUndo(new LibreriaMemento(new ArrayList<>(libri)));
+        // ripristiniamo l'ultimo memento prima dell'undo
+        libri = caretaker.popRedo().getStatoSalvato();
+        salvaSuFile();
     }
 
     public List<Libro> getLibri() {
@@ -39,26 +70,5 @@ public class LibreriaOriginator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void undo() {
-        if (caretaker.haStatiSalvati()) {
-            libri = caretaker.ripristinaUltimoStato().getStatoSalvato();
-        } else {
-            System.out.println("Nessuno stato precedente disponibile.");
-        }
-    }
-
-    public void redo() {
-        if (caretaker.haStatiRedo()) {
-            caretaker.salvaStato(new LibreriaMemento(libri));
-            libri = caretaker.ripristinaStatoRedo().getStatoSalvato();
-        } else {
-            System.out.println("Nessuno stato redo disponibile.");
-        }
-    }
-
-    private void salvaStatoCorrente() {
-        caretaker.salvaStato(new LibreriaMemento(libri));
     }
 }

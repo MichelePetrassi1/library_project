@@ -4,30 +4,27 @@ import java.util.Stack;
 
 public class LibreriaCaretaker {
 
-    private final Stack<LibreriaMemento> cronologia = new Stack<>();
-    private final Stack<LibreriaMemento> cronologiaRedo = new Stack<>();
+    private final Stack<LibreriaMemento> undoStack = new Stack<>();
+    private final Stack<LibreriaMemento> redoStack = new Stack<>();
 
-    public void salvaStato(LibreriaMemento memento) {
-        cronologia.push(memento);
-        cronologiaRedo.clear(); //a ogni salvataggio dobbiamo svuotare redo
 
+    public void salvaMemento(LibreriaMemento m) {
+        undoStack.push(m);
+        redoStack.clear(); //a ogni nuova azione, puliamo lo stack di redo
     }
 
-    public boolean haStatiSalvati() {
-        return !cronologia.isEmpty();
+    public void pushRedo(LibreriaMemento m) {
+        redoStack.push(m);
     }
 
-    public boolean haStatiRedo() {
-        return !cronologiaRedo.isEmpty();
+    public void pushUndo(LibreriaMemento m) {
+        undoStack.push(m);
     }
 
-    public LibreriaMemento ripristinaStatoRedo() {
-        return cronologiaRedo.pop();
-    }
+    public boolean haMementoUndo() { return !undoStack.isEmpty(); }
+    public boolean haMementoRedo() { return !redoStack.isEmpty(); }
 
-    public LibreriaMemento ripristinaUltimoStato() {
-        if (cronologia.isEmpty()) return null;
-        return cronologia.pop();
-    }
+    public LibreriaMemento popUndo() { return undoStack.pop(); }
+    public LibreriaMemento popRedo() { return redoStack.pop(); }
 
 }

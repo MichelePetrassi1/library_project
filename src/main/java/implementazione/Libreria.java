@@ -38,12 +38,20 @@ public  interface Libreria extends Iterable<Libro> {
     void undo();
 
     /**
-     * Ripristina l'ultima undo()
+     * Ripristina l'ultima modifica fatta da undo()
      */
     void redo();
 
     /**
-     * #TODO
+     * Inserisce un filtro
      */
     void setFiltro(Filtro filtro);
+
+    /**
+     * Modifica il contenuto di un libro. In pratica, viene sostituito il libro
+     * originale con quello nuovo
+     * @param originale
+     * @param nuovo
+     */
+    void modificaLibro(Libro originale, Libro nuovo);
 }

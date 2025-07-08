@@ -21,10 +21,6 @@ public class LibreriaImplementazione implements Libreria {
         this.originator = new LibreriaOriginator();
         this.ordinamento = new OrdinamentoContext(null);
     }
-    public LibreriaImplementazione(LibreriaOriginator originator) {
-        this.originator = originator;
-        this.ordinamento = new OrdinamentoContext(null);
-    }
 
     @Override
     public List<Libro> getLibri() {
@@ -56,7 +52,6 @@ public class LibreriaImplementazione implements Libreria {
             throw new IllegalArgumentException("Libro già presente.");
 
         originator.aggiungiLibro(libro);
-        originator.salvaSuFile();
     }
 
     @Override
@@ -71,15 +66,13 @@ public class LibreriaImplementazione implements Libreria {
             throw new IllegalArgumentException("Libro non trovato.");
 
         originator.rimuoviLibro(libro);
-        originator.salvaSuFile();
     }
 
     @Override
     public void setOrdine(OrdinamentoContext context) { this.ordinamento = context; }
 
     @Override
-    public void undo() { originator.undo();
-    }
+    public void undo() { originator.undo(); }
 
     @Override
     public void redo() { originator.redo();}
@@ -87,6 +80,11 @@ public class LibreriaImplementazione implements Libreria {
     @Override
     public void setFiltro(Filtro filtro) {
         this.filtro = filtro;
+    }
+
+    @Override
+    public void modificaLibro(Libro originale, Libro nuovo) {
+        originator.modificaLibro(originale,nuovo);
     }
 
     @Override

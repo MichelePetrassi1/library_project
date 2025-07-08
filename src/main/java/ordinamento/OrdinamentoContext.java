@@ -11,9 +11,9 @@ public class OrdinamentoContext {
         this.strategy = strategy;
     }
 
-    public void setStrategy(OrdinamentoStrategy strategy) {
-        this.strategy = strategy;
-    }
+    //public void setStrategy(OrdinamentoStrategy strategy) {
+        //this.strategy = strategy;
+    //}
 
     public List<Libro> eseguiOrdinamento(List<Libro> libri) {
         if (strategy == null) {

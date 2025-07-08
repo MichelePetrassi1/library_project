@@ -105,6 +105,9 @@ public class Libro implements Serializable {
     /**
      * Implementiamo i metodi per la verifica del codice ISBN, secondo le
      * regole dell'ISBN-10 e dell'ISBN-13
+     *
+     * Nota: per questione testing dei metodi, per semplicità, il codice dell'ISBN non è
+     * utilizzato
      */
 
     private boolean isValidIsbn10(String isbn) {
