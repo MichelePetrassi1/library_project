@@ -178,7 +178,11 @@ public class LibreriaGUI extends JFrame {
                     Integer.parseInt(valutazione.getText()),
                     (Libro.StatoLettura) stato.getSelectedItem()
             );
-            invoker.eseguiComando(new CommandAggiungiLibro(libreria, libro));
+            try {
+                invoker.eseguiComando(new CommandAggiungiLibro(libreria, libro));
+            }catch (IllegalArgumentException h){
+                JOptionPane.showMessageDialog(this, "Libro con ISBN già presente");
+            }
             aggiornaTabella();
         }
     }
