@@ -23,6 +23,7 @@ public class LibreriaGUI extends JFrame {
     private final JComboBox<Integer> boxValutazione;
     private final JTextField fieldAutore;
     private final JComboBox<String> boxOrdinamento;
+    private final FiltroBuilder builder;
 
     public LibreriaGUI() {
         super("Gestore Libreria");
@@ -46,6 +47,7 @@ public class LibreriaGUI extends JFrame {
         add(createButtonPanel(), BorderLayout.SOUTH);
 
         // applica il filtro vuoto all'avvio
+        builder = new FiltroBuilderImpl();
         applicazioneFiltro(null);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -106,7 +108,6 @@ public class LibreriaGUI extends JFrame {
     }
 
     private void applicazioneFiltro(ActionEvent e) {
-        FiltroBuilderImpl builder = new FiltroBuilderImpl();
         if (boxGenere.getSelectedItem() != null)
             builder.setFiltroGenere((Libro.Genere) boxGenere.getSelectedItem());
         else builder.rimuoviFiltroGenere();

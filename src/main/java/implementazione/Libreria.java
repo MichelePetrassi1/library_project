@@ -6,7 +6,7 @@ import ordinamento.OrdinamentoStrategy;
 
 import java.util.*;
 
-public  interface Libreria extends Iterable<Libro> {
+public  interface Libreria {
     /**
      * Restituisce la lista dei libri
      */

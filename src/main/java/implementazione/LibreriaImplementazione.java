@@ -87,8 +87,4 @@ public class LibreriaImplementazione implements Libreria {
         originator.modificaLibro(originale,nuovo);
     }
 
-    @Override
-    public Iterator<Libro> iterator() {
-        return getLibri().iterator();
-    }
 }

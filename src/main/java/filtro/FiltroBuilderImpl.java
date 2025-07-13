@@ -10,6 +10,13 @@ public class FiltroBuilderImpl implements FiltroBuilder {
     private FiltroValutazione filtroValutazione;
     private FiltroStato filtroStato;
 
+    public FiltroBuilderImpl(){
+        setFiltroAutore(null);
+        setFiltroValutazione(0);
+        setFiltroGenere(null);
+        setFiltroStato(null);
+    }
+
     @Override
     public FiltroBuilder setFiltroAutore(String autore) {
         this.filtroAutore = (autore == null || autore.isEmpty()) ? null : new FiltroAutore(autore);
